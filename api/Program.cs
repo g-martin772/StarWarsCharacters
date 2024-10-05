@@ -30,3 +30,5 @@ app.MapScalarApiReference();
 app.MapSwCharactersEndpoints();
 
 await app.RunAsync("http://*:7145");
+
+public partial class Program { }
