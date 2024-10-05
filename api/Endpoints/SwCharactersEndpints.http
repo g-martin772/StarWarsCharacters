@@ -1,0 +1,21 @@
+GET localhost:7145/openapi/v1.json
+
+###
+
+GET localhost:7145/scalar/v1
+
+###
+
+GET localhost:7145/sw-characters
+
+###
+
+GET localhost:7145/sw-characters?name=Yoda
+
+###
+
+GET localhost:7145/sw-characters?faction=Sith
+
+###
+
+GET localhost:7145/sw-characters/12
