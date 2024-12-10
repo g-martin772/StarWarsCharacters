@@ -22,13 +22,29 @@ builder.Services.AddHostedService(sp => sp.GetRequiredService<DbInitializer>());
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddGraphQLServer()
+    .AddQueryType<Query>()
+    .AddFiltering()
+    .AddSorting()
+    .AddProjections();
+
 var app = builder.Build();
 
 app.MapOpenApi();
 app.MapScalarApiReference();
+app.MapGraphQL(path: "/graphql");
 
 app.MapSwCharactersEndpoints();
 
 await app.RunAsync("http://*:7145");
 
 public partial class Program { }
+
+public class Query()
+{
+    [UseProjection]
+    [UseSorting]
+    [UseFiltering]
+    public IQueryable<SwCharacter> Characters([Service] SwDbContext context) =>
+        context.SwCharacters.AsQueryable();
+}
